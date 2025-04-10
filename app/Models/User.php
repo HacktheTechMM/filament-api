@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Storage\StorageService;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Support\Facades\Storage;
 use Filament\Models\Contracts\HasAvatar;
@@ -72,5 +73,13 @@ class User extends Authenticatable implements HasAvatar
 
         return $path ? Storage::disk('public')->url($path) : null;
     }
+
+    public function getAvatarUrlAttribute($value)
+    {
+        $storageService = new StorageService();
+
+        return ($value && $storageService->exists($value)) ? $storageService->getUrl($value) : null;
+    }
+
 
 }
