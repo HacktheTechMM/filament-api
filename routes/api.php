@@ -16,8 +16,8 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function(){
     Route::prefix('auth')->group(function(){
-        Route::post('signin',[AuthController::class,'login'])->name('login');
-        Route::post('register',[AuthController::class,'register'])->name('register');
+        Route::post('signin',[AuthController::class,'login'])->name('api.login');
+        Route::post('register',[AuthController::class,'register'])->name('api.register');
     });
 
     Route::prefix('users')->middleware('auth:sanctum')->group(function(){
