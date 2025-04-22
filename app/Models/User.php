@@ -24,17 +24,14 @@ class User extends Authenticatable implements HasAvatar
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'avatar_url',
-        'specialization',
-        'current_level',
-        'tech_stack',
-        'last_roadmap_id',
-        'role',
-    ];
+    protected $guarded = [];
+
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    //     'avatar_url',
+    // ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -48,6 +45,7 @@ class User extends Authenticatable implements HasAvatar
 
     const ROLE_ADMIN = 'ADMIN';
     const ROLE_USER = 'USER';
+    const ROLE_MENTOR = 'MENTOR';
 
     const ROLE_DEFAULT = self::ROLE_USER;
 
