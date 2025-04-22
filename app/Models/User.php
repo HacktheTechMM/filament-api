@@ -29,6 +29,11 @@ class User extends Authenticatable implements HasAvatar
         'email',
         'password',
         'avatar_url',
+        'specialization',
+        'current_level',
+        'tech_stack',
+        'last_roadmap_id',
+        'role',
     ];
 
     /**
@@ -49,6 +54,8 @@ class User extends Authenticatable implements HasAvatar
     const ROLES = [
         self::ROLE_ADMIN => 'Admin',
         self::ROLE_USER => 'User',
+        self::ROLE_MENTOR => 'Mentor',
+
     ];
 
     /**
