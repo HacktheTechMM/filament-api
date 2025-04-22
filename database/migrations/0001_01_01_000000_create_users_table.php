@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('role')->default(User::ROLE_DEFAULT);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('specialization')->nullable();
+            $table->string('current_level')->nullable();
+            $table->string('tech_stack')->nullable();
+            $table->integer('last_roadmap_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
