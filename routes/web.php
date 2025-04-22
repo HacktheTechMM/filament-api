@@ -6,14 +6,20 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Filament\Notifications\Notification;
 use Illuminate\Console\Scheduling\Event;
+use Filament\Notifications\Actions\Action;
+use App\Http\Controllers\Api\Auth\OAuthController;
 use App\Mail\Visualbuilder\EmailTemplates\UserWelcome;
 use Filament\Notifications\Events\DatabaseNotificationsSent;
-use Filament\Notifications\Actions\Action;
 
 
 Route::get('/', function () {
     return redirect()->route('filament.admin.auth.login');
 });
+
+//for socialite login
+Route::get('/auth/{provider}/redirect', [OAuthController::class, 'redirect']);
+
+Route::get('/auth/{provider}/callback', [OAuthController::class, 'callback']);
 
 // for email verification
 // Route::get('/email/verify', function () {
