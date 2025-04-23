@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use Exception;
+use App\Traits\HttpResponse;
+use Illuminate\Http\Request;
+use App\Models\MentorProfile;
+use App\Models\LearnerProfile;
+use App\Storage\StorageService;
 use App\Http\Controllers\Controller;
+use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\UserRequest;
 use App\Http\Resources\User\UserResource;
-use App\Repositories\UserRepository;
-use App\Storage\StorageService;
-use App\Traits\HttpResponse;
-use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -88,5 +92,60 @@ class UserController extends Controller
         } catch (Exception $e) {
            return $this->error($e->getMessage(),[],false,500);
         }
+    }
+
+    // upgrade user role to learner or mentor
+    // Upgrade user to Learner or Mentor
+    public function upgrade(Request $request)
+    {
+        $user = Auth::user(); // Get the currently authenticated user
+
+        // Validate the upgrade request (only upgrade once to learner or mentor)
+        $validator = Validator::make($request->all(), [
+            'role' => 'required|in:learner,mentor', // Only allow learner or mentor role
+            'learner_profile' => 'nullable|array', // Learner profile details, if upgrading to learner
+            'mentor_profile' => 'nullable|array', // Mentor profile details, if upgrading to mentor
+            'learner_profile.age' => 'required_if:role,learner|integer|min:5',
+            'learner_profile.school_grade' => 'required_if:role,learner|string',
+            'mentor_profile.bio' => 'required_if:role,mentor|string',
+            'mentor_profile.experience' => 'required_if:role,mentor|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Set the user role
+        $user->role = $request->role;
+        $user->save();
+
+        // Create Learner or Mentor profile based on the role
+        if ($request->role == 'learner') {
+            // Create Learner profile
+            $learnerProfile = LearnerProfile::create([
+                'user_id' => $user->id,
+                'age' => $request->learner_profile['age'],
+                'school_grade' => $request->learner_profile['school_grade'],
+                'guardian_contact' => $request->learner_profile['guardian_contact'] ?? null,
+                'learning_goals' => $request->learner_profile['learning_goals'] ?? null,
+                'special_needs' => $request->learner_profile['special_needs'] ?? null,
+                'location' => $request->learner_profile['location'] ?? null,
+            ]);
+        }
+
+        if ($request->role == 'mentor') {
+            // Create Mentor profile
+            $mentorProfile = MentorProfile::create([
+                'user_id' => $user->id,
+                'bio' => $request->mentor_profile['bio'],
+                'experience' => $request->mentor_profile['experience'],
+                'availability' => json_encode($request->mentor_profile['availability']), // Assuming availability is an array of available times
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'User upgraded successfully to ' . $request->role,
+            'user' => $user,
+        ]);
     }
 }
