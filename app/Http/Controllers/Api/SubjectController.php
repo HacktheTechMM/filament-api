@@ -24,4 +24,17 @@ class SubjectController extends Controller
             'data'=>SubjectResource::make($subject)
         ]);
     }
+
+    public function store(Request $request){
+        $request->validate([
+            'name'=>'required|string|max:255',
+        ]);
+        $subject=Subject::create([
+            'name'=>request('name'),
+        ]);
+        return response()->json([
+            'message'=>'Subject created successfully',
+            'data'=>SubjectResource::make($subject)
+        ]);
+    }
 }

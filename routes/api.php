@@ -41,6 +41,7 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get('subjects',[SubjectController::class,'index'])->name('subjects.index');
+    Route::post('subjects',[SubjectController::class,'store'])->name('subjects.store')->middleware('auth:sanctum');
     Route::get('subjects/{id}',[SubjectController::class,'show'])->name('subjects.show');
 
     //for interview
