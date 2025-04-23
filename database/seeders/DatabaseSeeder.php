@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([RoadmapSeeder::class,RoadmapSetupSeeder::class]);
         // User::factory(10)->create();
-        $this->call([
-            EmailTemplateSeeder::class,
-            EmailTemplateThemeSeeder::class,
-        ]);
+        // $this->call([
+        //     EmailTemplateSeeder::class,
+        //     EmailTemplateThemeSeeder::class,
+        // ]);
 
         User::factory()->create([
             'name' => 'Test User',
