@@ -33,6 +33,16 @@ class DatabaseSeeder extends Seeder
             'last_roadmap_id'=>1,
         ]);
 
+        User::factory()->create([
+            'name' => 'Learner',
+            'email' => 'learner@gmail.com',
+            'role'=>User::ROLE_USER,
+            'specialization'=>'laravel',
+            'current_level'=>'junior',
+            'tech_stack'=>'laravel,vuejs',
+            'last_roadmap_id'=>1,
+        ]);
+
         // User::factory()->create([
         //     'name' => 'Moe Wai Yan',
         //     'email' => 'moewaiyan@example.com',

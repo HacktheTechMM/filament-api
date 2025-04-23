@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MentorRequestController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -47,6 +48,7 @@ Route::prefix('v1')->group(function(){
 
     Route::get('/feedbacks/interviews/{interviewId}', [InterviewFeedbackController::class, 'getByInterview']);
     Route::post('mentor-subject',[MentorSubjectController::class,'create'])->name('mentor-subject.create')->middleware('auth:sanctum');
+    Route::post('mentor-request',[MentorRequestController::class,'create'])->name('mentor-request.create')->middleware('auth:sanctum');
 
 
 });
