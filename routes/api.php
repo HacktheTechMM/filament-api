@@ -35,6 +35,7 @@ Route::prefix('v1')->group(function () {
         Route::put('update/{id}', [UserController::class, 'update'])->name('user.update');
         Route::post('upload-image', [UserController::class, 'uploadImage'])->name('user.upload-image');
         Route::post('upgrade', [UserController::class, 'upgrade'])->name('user.upgrade');
+        Route::get('get-mentors',[UserController::class,'getMentors'])->name('user.get-mentors');
 
         // Optional: Get all interviews by user
         Route::get('{userId}/interviews', [InterviewController::class, 'getByUser']);

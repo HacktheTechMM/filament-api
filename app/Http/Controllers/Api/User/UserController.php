@@ -100,6 +100,7 @@ class UserController extends Controller
     // Upgrade user to Learner or Mentor
     public function upgrade(Request $request)
     {
+
         $user = Auth::user(); // Get the currently authenticated user
 
         // Validate the upgrade request (only upgrade once to learner or mentor)
@@ -172,6 +173,21 @@ class UserController extends Controller
                 ]);
 
             }
+        }
+    }
+
+    public function getMentors(){
+        try {
+            $mentors = MentorProfile::with('subjects')->get();
+            return response()->json([
+                'message'=>'Mentors retrieved successfully',
+                'data'=>MentorProfileResource::collection($mentors)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'=>'Something went wrong',
+                'error'=>$e->getMessage()
+            ],500);
         }
     }
 }
