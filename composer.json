@@ -12,6 +12,8 @@
         "laravel/framework": "^11.31",
         "laravel/reverb": "^1.0",
         "laravel/sanctum": "^4.0",
+        "laravel/slack-notification-channel": "^3.5",
+        "laravel/socialite": "^5.18",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.6",
         "visualbuilder/email-templates": "^3.1"

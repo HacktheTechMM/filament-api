@@ -15,12 +15,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('bio')->nullable();
-            $table->string('url')->nullable();
-            $table->string('username');
+            $table->string('email')->unique()->nullable();
             $table->string('role')->default(User::ROLE_DEFAULT);
             $table->timestamp('email_verified_at')->nullable();
+            //socialite login
+            $table->string('provider')->nullable();
+            $table->string('provider_id')->nullable();
+            $table->string('provider_token', 255)->nullable();
+            $table->string('provider_avatar')->nullable();
+
             $table->string('password');
             $table->string('specialization')->nullable();
             $table->string('current_level')->nullable();
