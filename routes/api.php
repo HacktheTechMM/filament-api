@@ -24,7 +24,9 @@ Route::prefix('v1')->group(function(){
         Route::get('/{id}/',[UserController::class,'getUser'])->name('user.show');
         Route::put('update/{id}',[UserController::class,'update'])->name('user.update');
         Route::post('upload-image',[UserController::class,'uploadImage'])->name('user.upload-image');
+        Route::post('upgrade',[UserController::class,'upgrade'])->name('user.upgrade');
     });
+
 
 });
 
