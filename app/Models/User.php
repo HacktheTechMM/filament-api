@@ -88,5 +88,14 @@ class User extends Authenticatable implements HasAvatar
         return ($value && $storageService->exists($value)) ? $storageService->getUrl($value) : null;
     }
 
+    public function mentorProfile()
+    {
+        return $this->hasOne(MentorProfile::class);
+    }
+    public function learnerProfile()
+    {
+        return $this->hasOne(LearnerProfile::class);
+    }
+
 
 }
