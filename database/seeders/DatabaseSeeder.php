@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@gmail.com',
             'role'=>User::ROLE_USER,
+            'username'=>'testuser',
             'specialization'=>'laravel',
             'current_level'=>'junior',
             'tech_stack'=>'laravel,vuejs',

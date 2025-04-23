@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use Exception;
+use App\Models\User;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use App\Models\MentorProfile;
@@ -115,10 +116,7 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // If user is already upgraded, return an error
-        if ($user->role) {
-            return response()->json(['error' => 'User is already upgraded to a role'], 400);
-        }
+        // If user is already upgraded, return an erro
 
         // Set the user role
         $user->role = $request->role;
@@ -136,6 +134,8 @@ class UserController extends Controller
                 'special_needs' => $request->learner_profile['special_needs'] ?? null,
                 'location' => $request->learner_profile['location'] ?? null,
             ]);
+
+
         }
 
         if ($request->role == 'mentor') {
