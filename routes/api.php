@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SubjectController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,9 @@ Route::prefix('v1')->group(function () {
         // Optional: Get all interviews by user
         Route::get('{userId}/interviews', [InterviewController::class, 'getByUser']);
     });
+
+    Route::get('subjects',[SubjectController::class,'index'])->name('subjects.index');
+    Route::get('subjects/{id}',[SubjectController::class,'show'])->name('subjects.show');
 
     //for interview
     Route::prefix('interviews')->middleware('auth:sanctum')->group(function () {
