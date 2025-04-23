@@ -50,7 +50,12 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get('/feedbacks/interviews/{interviewId}', [InterviewFeedbackController::class, 'getByInterview']);
-    Route::post('mentor-subject', [MentorSubjectController::class, 'create'])->name('mentor-subject.create')->middleware('auth:sanctum');
-    Route::post('mentor-request', [MentorRequestController::class, 'create'])->name('mentor-request.create')->middleware('auth:sanctum');
-    Route::post('mentor-request/accept/{id}', [MentorRequestController::class, 'accept'])->name('mentor-request.accept')->middleware('auth:sanctum');
+
+    Route::post('mentor-subject',[MentorSubjectController::class,'create'])->name('mentor-subject.create')->middleware('auth:sanctum');
+    Route::post('mentor-request',[MentorRequestController::class,'create'])->name('mentor-request.create')->middleware('auth:sanctum');
+    Route::patch('mentor-request/accept/{id}',[MentorRequestController::class, 'accept'])->name('mentor-request.accept')->middleware('auth:sanctum');
+
+
+
+
 });

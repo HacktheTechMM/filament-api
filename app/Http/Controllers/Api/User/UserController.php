@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use App\Http\Resources\LearnerResource;
+use App\Http\Resources\MentorProfileResource;
 use Exception;
 use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
@@ -12,7 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\UserRequest;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -120,32 +122,56 @@ class UserController extends Controller
         $user->save();
 
         // Create Learner or Mentor profile based on the role
-        if ($request->role == 'learner') {
-            // Create Learner profile
-            $learnerProfile = LearnerProfile::create([
-                'user_id' => $user->id,
-                'age' => $request->learner_profile['age'],
-                'school_grade' => $request->learner_profile['school_grade'],
-                'guardian_contact' => $request->learner_profile['guardian_contact'] ?? null,
-                'learning_goals' => $request->learner_profile['learning_goals'] ?? null,
-                'special_needs' => $request->learner_profile['special_needs'] ?? null,
-                'location' => $request->learner_profile['location'] ?? null,
+        if (auth()->user()->learnerProfile) {
+            return response()->json([
+                'message'=>'You are already a learner',
             ]);
+        }else {
+            if ($request->role === 'learner') {
+                // Create Learner profile
+                    $learnerProfile = LearnerProfile::create([
+                        'user_id' => $user->id,
+                        'age' => $request->learner_profile['age'],
+                        'school_grade' => $request->learner_profile['school_grade'],
+                        'guardian_contact' => $request->learner_profile['guardian_contact'] ?? null,
+                        'learning_goals' => $request->learner_profile['learning_goals'] ?? null,
+                        'special_needs' => $request->learner_profile['special_needs'] ?? null,
+                        'location' => $request->learner_profile['location'] ?? null,
+                    ]);
+
+
+                return response()->json([
+                    'message' => 'User upgraded successfully to ' . $request->role,
+                    'data' =>[
+                        'learner'=>LearnerResource::make($learnerProfile)
+                    ],
+                ]);
+            }
         }
 
-        if ($request->role == 'mentor') {
-            // Create Mentor profile
-            $mentorProfile = MentorProfile::create([
-                'user_id' => $user->id,
-                'bio' => $request->mentor_profile['bio'],
-                'experience' => $request->mentor_profile['experience'],
-                'availability' => json_encode($request->mentor_profile['availability']), // Assuming availability is an array of available times
+        if (auth()->user()->mentorProfile) {
+            return response()->json([
+                'message'=>'You are already a mentor',
             ]);
-        }
+        }else {
+            if ($request->role == 'mentor') {
+                // Create Mentor profile
+                $mentorProfile = MentorProfile::create([
+                    'user_id' => $user->id,
+                    'bio' => $request->mentor_profile['bio'],
+                    'experience' => $request->mentor_profile['experience'],
+                    'availability' => json_encode($request->mentor_profile['availability']), // Assuming availability is an array of available times
+                ]);
+                $mentorProfile=MentorProfile::with('subjects')->find($mentorProfile->id)->first();
 
-        return response()->json([
-            'message' => 'User upgraded successfully to ' . $request->role,
-            'user' => $user,
-        ]);
+                return response()->json([
+                    'message' => 'User upgraded successfully to ' . $request->role,
+                    'data'=>[
+                        'mentor'=>MentorProfileResource::make($mentorProfile)
+                    ]
+                ]);
+
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ class MentorProfile extends Model
     protected $guarded = [''];
 
     public function subjects(){
-        return $this->belongsToMany(MentorProfile::class, 'mentor_subjects', 'mentor_id', 'subject_id');
+        return $this->belongsToMany(Subject::class, 'mentor_subjects', 'mentor_id', 'subject_id');
     }
 
     protected $casts = [
