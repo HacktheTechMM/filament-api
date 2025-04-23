@@ -11,4 +11,9 @@ class MentorProfile extends Model
     public function subjects(){
         return $this->belongsToMany(MentorProfile::class, 'mentor_subjects', 'mentor_id', 'subject_id');
     }
+
+    protected $casts = [
+        'availability' => 'array',
+    ];
+
 }
