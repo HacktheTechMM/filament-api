@@ -115,11 +115,6 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // If user is already upgraded, return an error
-        if ($user->role) {
-            return response()->json(['error' => 'User is already upgraded to a role'], 400);
-        }
-
         // Set the user role
         $user->role = $request->role;
         $user->save();
