@@ -9,7 +9,6 @@ use App\Http\Requests\User\UserRequest;
 use App\Http\Resources\User\UserResource;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\InterviewFeedbackController;
@@ -49,7 +48,7 @@ Route::prefix('v1')->group(function(){
     Route::get('/feedbacks/interviews/{interviewId}', [InterviewFeedbackController::class, 'getByInterview']);
     Route::post('mentor-subject',[MentorSubjectController::class,'create'])->name('mentor-subject.create')->middleware('auth:sanctum');
     Route::post('mentor-request',[MentorRequestController::class,'create'])->name('mentor-request.create')->middleware('auth:sanctum');
-
+    Route::post('mentor-request/accept/{id}',[MentorRequestController::class, 'accept'])->name('mentor-request.accept')->middleware('auth:sanctum');
 
 });
 
