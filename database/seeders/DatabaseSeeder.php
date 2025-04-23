@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call([RoadmapSeeder::class]);
+        $this->call([RoadmapSeeder::class,RoadmapSetupSeeder::class]);
         // User::factory(10)->create();
         $this->call([
             EmailTemplateSeeder::class,

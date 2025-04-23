@@ -20,5 +20,21 @@ class RoadmapSeeder extends Seeder
             'difficulty_level' => 'Intermediate',
             'ai_generated' => false,
         ]);
+
+        Roadmap::create([
+            'title' => 'Vue Roadmap',
+            'description' => 'A comprehensive roadmap for learning Vue.',
+            'language' => 'Javascript',
+            'difficulty_level' => 'Intermediate',
+            'ai_generated' => false,
+        ]);
+
+        Roadmap::create([
+            'title' => 'React Roadmap',
+            'description' => 'A comprehensive roadmap for learning React.',
+            'language' => 'Javascript',
+            'difficulty_level' => 'Intermediate',
+            'ai_generated' => false,
+        ]);
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('resource_url')->nullable();
+            $table->integer('estimated_time_minutes');
             $table->timestamps();
         });
     }

@@ -16,6 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique()->nullable();
+            $table->string('username')->unique()->nullable();
+            $table->string('bio')->nullable();
+            $table->string('url')->nullable();
             $table->string('role')->default(User::ROLE_DEFAULT);
             $table->timestamp('email_verified_at')->nullable();
             //socialite login

@@ -46,7 +46,7 @@ class User extends Authenticatable implements HasAvatar
     const ROLE_ADMIN = 'ADMIN';
     const ROLE_USER = 'USER';
     const ROLE_MENTOR = 'MENTOR';
-    const ROLE_MENTOR = 'USER';
+
 
     const ROLE_DEFAULT = self::ROLE_USER;
 
