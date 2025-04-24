@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\MentorSubjectController;
 use App\Http\Controllers\InterviewFeedbackController;
 
 
-Route::post("v1/auth/me", function () {
+Route::get("v1/auth/me", function () {
     $user = Auth::user();
     return response()->json([
         'user' => $user,
