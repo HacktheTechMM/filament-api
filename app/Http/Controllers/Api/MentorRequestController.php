@@ -36,9 +36,9 @@ class MentorRequestController extends Controller
                 'subject_id' => 'required|exists:subjects,id',
                 'learner_id' => 'required|exists:learner_profiles,id',
                 'message' => 'nullable|string|max:255',
-                'requested_time' => 'nullable|array',
+                'requested_time' => 'required|array',
             ]);
-            $validator['requested_time'] = json_encode($mentor_availability_time);
+            $validator['requested_time'] = json_encode($request->requested_time);
             $mentor_request = MentorRequest::create($validator);
 
             $created_mentor_request = MentorRequest::where('id', $mentor_request->id)->with(['learner', 'mentor', 'subject'])->first();
