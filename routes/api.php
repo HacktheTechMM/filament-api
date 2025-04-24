@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\User\UserRequest;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\UserResource;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\User\UserController;
@@ -20,7 +20,9 @@ use App\Http\Controllers\InterviewFeedbackController;
 Route::get("v1/auth/me", function () {
     $user = Auth::user();
     return response()->json([
-        'user' => $user,
+        'data' =>[
+           'user'=> UserResource::make($user)
+        ],
     ]);
 })->middleware(['auth:sanctum']);
 
