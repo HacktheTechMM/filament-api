@@ -126,4 +126,50 @@ class MentorRequestController extends Controller
     //     return $joinUrl;
     // }
 
+    public function getMyMentorRequests(){
+        try {
+            $mentorRequests=MentorRequest::where('learner_id',auth()->user()->learnerProfile->id)->with(['mentor','subject'])->get();
+            return response()->json([
+                'message'=>'Mentor Requests',
+                'data'=>MentorRequestResource::collection($mentorRequests)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'=>'Something went wrong',
+                'error'=>$e->getMessage()
+            ],500);
+        }
+    }
+
+    public function getMyAcceptedMentors(){
+        try {
+            $mentorRequests=MentorRequest::where('learner_id',auth()->user()->learnerProfile->id)->where('status','accepted')->with(['mentor','subject'])->get();
+            return response()->json([
+                'message'=>'Mentor Requests',
+                'data'=>MentorRequestResource::collection($mentorRequests)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'=>'Something went wrong',
+                'error'=>$e->getMessage()
+            ],500);
+        }
+    }
+
+    public function getMentorLearnerRequests(){
+        try {
+            $mentorRequests=MentorRequest::where('mentor_id',auth()->user()->mentorProfile->id)->with(['learner','subject'])->get();
+            return response()->json([
+                'message'=>'Mentor Requests',
+                'data'=>MentorRequestResource::collection($mentorRequests)
+            ]);
+        } catch (\Exception $eh) {
+            return response()->json([
+                'message'=>'Something went wrong',
+                'error'=>$eh->getMessage()
+            ],500);
+
+        }
+    }
+
 }
