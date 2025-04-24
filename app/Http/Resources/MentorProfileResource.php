@@ -17,6 +17,7 @@ class MentorProfileResource extends JsonResource
         return [
             'id'=>$this->id,
             'user_id'=>$this->user_id,
+            'mentor_name'=>$this->user->name,
             'bio'=>$this->bio,
             'experience'=>$this->experience,
             'availability'=>$this->availability,
