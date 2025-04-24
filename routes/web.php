@@ -4,12 +4,20 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ZoomController;
 use Filament\Notifications\Notification;
 use Illuminate\Console\Scheduling\Event;
 use Filament\Notifications\Actions\Action;
 use App\Http\Controllers\Api\Auth\OAuthController;
 use App\Mail\Visualbuilder\EmailTemplates\UserWelcome;
 use Filament\Notifications\Events\DatabaseNotificationsSent;
+
+// routes/web.php
+
+Route::get('/zoom/authorize', [ZoomController::class, 'authorizeZoom']);
+Route::get('/zoom/callback', [ZoomController::class, 'handleCallback']);
+Route::get('/zoom/meeting/create', [ZoomController::class, 'createMeeting']);
+
 
 
 Route::get('/', function () {
