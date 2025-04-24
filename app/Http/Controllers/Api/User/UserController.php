@@ -179,6 +179,7 @@ class UserController extends Controller
     public function getMentors(){
         try {
             $mentors = MentorProfile::with('subjects')->get();
+
             return response()->json([
                 'message'=>'Mentors retrieved successfully',
                 'data'=>MentorProfileResource::collection($mentors)

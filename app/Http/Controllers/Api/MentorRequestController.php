@@ -37,10 +37,11 @@ class MentorRequestController extends Controller
             ]);
             $validator['requested_time'] = json_encode($mentor_availability_time);
             $mentor_request = MentorRequest::create($validator);
-            $mentor_request = MentorRequest::where('id', $mentor_request->id)->first();
+
+            $created_mentor_request = MentorRequest::where('id', $mentor_request->id)->with(['learner', 'mentor', 'subject'])->first();
             return response()->json([
                 'message' => 'Mentor Subject Created Successfully',
-                'data' => MentorRequestResource::make($mentor_request)
+                'data' => MentorRequestResource::make($created_mentor_request)
             ]);
         } catch (\Exception $e) {
             return $this->error('Something went wrong', $e->getMessage(), 500);
