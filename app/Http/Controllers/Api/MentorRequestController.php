@@ -51,12 +51,12 @@ class MentorRequestController extends Controller
         }
     }
 
-    protected $zoomService;
+    // protected $zoomService;
 
-    public function __construct(ZoomService $zoomService)
-    {
-        $this->zoomService = $zoomService;
-    }
+    // public function __construct(ZoomService $zoomService)
+    // {
+    //     $this->zoomService = $zoomService;
+    // }
 
     public function accept($id, Request $request)
     {
@@ -70,21 +70,21 @@ class MentorRequestController extends Controller
                 ]);
 
 
-                // Create the Zoom meeting link
-                $meeting_link = $this->zoomService->createMeeting(
-                    'Mentorship Session - ' . $mentor_request->mentor->name,
-                 Carbon::now()->format('Y-m-d\TH:i:s')
+                // // Create the Zoom meeting link
+                // $meeting_link = $this->zoomService->createMeeting(
+                //     'Mentorship Session - ' . $mentor_request->mentor->name,
+                //  Carbon::now()->format('Y-m-d\TH:i:s')
 
-                    // Carbon::parse($mentor_request->requested_time)->toDateTimeLocalString()
+                //     // Carbon::parse($mentor_request->requested_time)->toDateTimeLocalString()
 
-                );
+                // );
 
-                // Create the mentor session with the meeting link
-                $mentor_session = MentorSession::create([
-                    'request_id' => $mentor_request->id,
-                    'scheduled_time' => $mentor_request->requested_time,
-                    'meeting_link' => $meeting_link,
-                ]);
+                // // Create the mentor session with the meeting link
+                // $mentor_session = MentorSession::create([
+                //     'request_id' => $mentor_request->id,
+                //     'scheduled_time' => $mentor_request->requested_time,
+                //     'meeting_link' => $meeting_link,
+                // ]);
 
                 return response()->json([
                     'message' => 'Mentor Request Accepted Successfully',
