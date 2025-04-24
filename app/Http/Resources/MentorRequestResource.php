@@ -16,16 +16,18 @@ class MentorRequestResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'learner_id'=>$this->learner_id,
-            'subject_id'=>$this->subject_id,
-            'mentor_id'=>$this->mentor_id,
-            'message'=>$this->message,
-            'requested_time'=>$this->requested_time,
-            'status'=>$this->status,
-            'learner'=>LearnerProfileResource::make($this->learner),
-            'mentor'=>MentorProfileResource::make($this->mentor),
-            'subject'=>SubjectResource::make($this->subject)
+            'id' => $this->id,
+            'learner_id' => $this->learner_id,
+            'learner_name' => $this->learner->user->name, // learner name
+            'mentor_id' => $this->mentor_id,
+            'mentor_name' => $this->mentor->user->name, // mentor name
+            'subject_id' => $this->subject_id,
+            'subject_name' => $this->subject->name, // subject name
+            'message' => $this->message,
+            'requested_time' => json_decode($this->requested_time), // convert JSON string to array
+            'status' => $this->status,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
