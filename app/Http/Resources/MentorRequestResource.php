@@ -24,7 +24,7 @@ class MentorRequestResource extends JsonResource
             'subject_id' => $this->subject_id,
             'subject_name' => $this->subject->name, // subject name
             'message' => $this->message,
-            'requested_time' => json_decode($this->requested_time), // convert JSON string to array
+            'requested_time' => $this->requested_time, // convert JSON string to array
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
