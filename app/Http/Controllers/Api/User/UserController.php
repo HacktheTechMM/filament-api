@@ -106,12 +106,18 @@ class UserController extends Controller
         // Validate the upgrade request (only upgrade once to learner or mentor)
         $validator = Validator::make($request->all(), [
             'role' => 'required|in:learner,mentor', // Only allow learner or mentor role
-            'learner_profile' => 'nullable|array', // Learner profile details, if upgrading to learner
-            'mentor_profile' => 'nullable|array', // Mentor profile details, if upgrading to mentor
+            'learner_profile' => 'required_if:role,learner|array', // Learner profile details, if upgrading to learner
+            'mentor_profile' => 'required_if:role,mentor|array', // Mentor profile details, if upgrading to mentor
             'learner_profile.age' => 'required_if:role,learner|integer|min:5',
             'learner_profile.school_grade' => 'required_if:role,learner|string',
+            'learner_profile.guardian_contact' => 'nullable|string',
+            'learner_profile.learning_goals' => 'nullable|string',
+            'learner_profile.special_needs' => 'nullable|string',
+            'learner_profile.location' => 'nullable|string',
             'mentor_profile.bio' => 'required_if:role,mentor|string',
             'mentor_profile.experience' => 'required_if:role,mentor|string',
+            'mentor_profile.subjects' => 'required_if:role,mentor|array',
+            'mentor_profile.subjects.*' => 'exists:subjects,id', // Assuming you have a subjects table
         ]);
 
         if ($validator->fails()) {
@@ -161,14 +167,17 @@ class UserController extends Controller
                     'user_id' => $user->id,
                     'bio' => $request->mentor_profile['bio'],
                     'experience' => $request->mentor_profile['experience'],
-                    'availability' => json_encode($request->mentor_profile['availability']), // Assuming availability is an array of available times
+                    'availability' => $request->mentor_profile['availability'], // Assuming availability is an array of available times
                 ]);
-                $mentorProfile=MentorProfile::with('subjects')->find($mentorProfile->id)->first();
+                // $mentorProfile=MentorProfile::with('subjects')->find($mentorProfile->id)->first();
+                $mentorProfile=MentorProfile::find($mentorProfile->id);
+                $mentorProfile->subjects()->sync($request->mentor_profile['subjects']??[]);
+                $mentorProfile->load('subjects');
 
                 return response()->json([
                     'message' => 'User upgraded successfully to ' . $request->role,
                     'data'=>[
-                        'mentor'=>MentorProfileResource::make($mentorProfile)
+                        'mentor'=>$mentorProfile
                     ]
                 ]);
 
