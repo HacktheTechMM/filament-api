@@ -17,9 +17,9 @@ use Filament\Notifications\Events\DatabaseNotificationsSent;
 
 
 
-Route::get('/', function () {
-    return redirect()->route('filament.admin.auth.login');
-});
+// Route::get('/', function () {
+//     return redirect()->route('filament.admin.auth.login');
+// });
 
 //for socialite login
 Route::get('/auth/{provider}/redirect', [OAuthController::class, 'redirect']);
@@ -60,4 +60,15 @@ Route::get('/test-notification/{message}', function ($message) {
     event(new DatabaseNotificationsSent($recipient));
 
     dd('Notification sent successfully');
+});
+
+Route::get('/test-email',function(){
+    $data = [
+        'learner_name' => 'mg mg',
+        'mentor_name' =>' ko ko' ,
+        'subject' => 'english',
+        'requested_time' => '2023-10-10 10:00:00',
+        'meeting_link' => 'https://example.com/meeting/12345',
+    ];
+    return view('mail.meeting-invite',compact('data'));
 });
