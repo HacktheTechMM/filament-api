@@ -28,18 +28,12 @@ class DatabaseSeeder extends Seeder
         //     EmailTemplateThemeSeeder::class,
         // ]);
 
-        $availability = [
-            'Mon' => ['10:00', '14:00'],
-            'Tue' => ['09:00', '13:00'],
-            'Wed' => ['11:00', '15:00'],
-        ];
-
        $mentor= User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@gmail.com',
             'role'=>User::ROLE_MENTOR,
             'specialization'=>'laravel',
-            'current_level'=>'junior',
+            'current_level'=>'intermediate',
             'tech_stack'=>'laravel,vuejs',
             'last_roadmap_id'=>1,
         ]);
@@ -49,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'mentora@gmail.com',
             'role'=>User::ROLE_MENTOR,
             'specialization'=>'laravel',
-            'current_level'=>'junior',
+            'current_level'=>'intermediate',
             'tech_stack'=>'laravel,vuejs',
             'last_roadmap_id'=>1,
         ]);
@@ -59,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'mentor2@gmail.com',
             'role'=>User::ROLE_MENTOR,
             'specialization'=>'laravel',
-            'current_level'=>'junior',
+            'current_level'=>'intermediate',
             'tech_stack'=>'laravel,vuejs',
             'last_roadmap_id'=>1,
         ]);
@@ -78,26 +72,26 @@ class DatabaseSeeder extends Seeder
             'user_id'=>$mentor->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability' => json_encode($availability),
+            'availability' => 'Monday 10:00-12:00',
         ]);
         MentorProfile::factory()->create([
             'user_id'=>$mentor_second->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability'=>json_encode($availability),
+            'availability'=>'Tuesday 10:00-12:00',
         ]);
         MentorProfile::factory()->create([
             'user_id'=>$mentor_third->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability'=>json_encode($availability),
+            'availability'=>'Wednesday 10:00-12:00',
         ]);
 
         MentorProfile::factory()->create([
             'user_id'=>$mentor_forth->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability'=>json_encode($availability),
+            'availability'=>'Thursday 10:00-12:00',
         ]);
 
 
@@ -151,11 +145,7 @@ class DatabaseSeeder extends Seeder
         'mentor_id'=>$mentor->id,
         'subject_id'=>$subject1->id,
         'message'=>'Hello',
-        'requested_time' => json_encode([
-            'Mon' => ['10:00', '14:00'],
-            'Tue' => ['09:00', '13:00'],
-            'Wed' => ['11:00', '15:00'],
-        ]),
+        'requested_time' => 'Monday 10:00-12:00',
       ]);
 
       $mentor_request=MentorRequest::create([
@@ -163,11 +153,7 @@ class DatabaseSeeder extends Seeder
         'mentor_id'=>$mentor_second->id,
         'subject_id'=>$subject2->id,
         'message'=>'Hello',
-        'requested_time' => json_encode([
-            'Mon' => ['10:00', '14:00'],
-            'Tue' => ['09:00', '13:00'],
-            'Wed' => ['11:00', '15:00'],
-        ]),
+        'requested_time' => 'Tuesday 10:00-12:00',
       ]);
 
 

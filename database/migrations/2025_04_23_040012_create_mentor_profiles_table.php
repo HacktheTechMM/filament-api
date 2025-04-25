@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('bio');
             $table->text('experience');
-            $table->json('availability');
+            $table->string('availability');
             $table->timestamps();
         });
     }
