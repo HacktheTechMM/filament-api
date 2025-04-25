@@ -20,13 +20,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\MentorRequestResource;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class MentorRequestController extends Controller
 {
+    use AuthorizesRequests;
     use HttpResponse;
     public function create(Request $request)
     {
         try {
+
+            $this->authorize('create', MentorRequest::class);
             $user = auth()->user();
             $learner = LearnerProfile::where('user_id', $user->id)->first();
             $mentor = MentorSubject::where('subject_id', $request->subject_id)->first();

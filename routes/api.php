@@ -50,6 +50,8 @@ Route::prefix('v1')->group(function () {
 
 
 
+
+
     Route::get('subjects',[SubjectController::class,'index'])->name('subjects.index');
     Route::post('subjects',[SubjectController::class,'store'])->name('subjects.store')->middleware('auth:sanctum');
     Route::get('subjects/{id}',[SubjectController::class,'show'])->name('subjects.show');
@@ -66,15 +68,20 @@ Route::prefix('v1')->group(function () {
 
     Route::get('/feedbacks/interviews/{interviewId}', [InterviewFeedbackController::class, 'getByInterview']);
 
-    Route::post('mentor-subject',[MentorSubjectController::class,'create'])->name('mentor-subject.create')->middleware('auth:sanctum');
-    Route::post('mentor-request',[MentorRequestController::class,'create'])->name('mentor-request.create')->middleware('auth:sanctum');
-    Route::patch('mentor-request/accept/{id}',[MentorRequestController::class, 'accept'])->name('mentor-request.accept')->middleware('auth:sanctum');
+    Route::middleware(['auth:sanctum','mustBeMentor'])->group(function(){
+        Route::post('mentor-subject',[MentorSubjectController::class,'create'])->name('mentor-subject.create');
+        Route::patch('mentor-request/accept/{id}',[MentorRequestController::class, 'accept'])->name('mentor-request.accept');
+        Route::get('mentor/learner-requests',[MentorRequestController::class,'getMentorLearnerRequests'])->name('mentor-request.get-learner-requests');
+    });
 
-    Route::get('my-mentor-requests',[MentorRequestController::class,'getMyMentorRequests'])->name('mentor-request.get-my-requests')->middleware('auth:sanctum');
-    Route::get('my-accepted-mentors',[MentorRequestController::class,'getMyAcceptedMentors'])->name('mentor-request.get-my-accepted-mentors')->middleware('auth:sanctum');
 
-    //for mentor
-    Route::get('mentor/learner-requests',[MentorRequestController::class,'getMentorLearnerRequests'])->name('mentor-request.get-learner-requests')->middleware('auth:sanctum');
+
+
+    Route::middleware(['auth:sanctum','mustBeLearner'])->group(function(){
+        Route::post('mentor-request',[MentorRequestController::class,'create'])->name('mentor-request.create');
+        Route::get('my-mentor-requests',[MentorRequestController::class,'getMyMentorRequests'])->name('mentor-request.get-my-requests');
+        Route::get('my-accepted-mentors',[MentorRequestController::class,'getMyAcceptedMentors'])->name('mentor-request.get-my-accepted-mentors');
+    });
 
     Route::get('get-meeting',[ZegoController::class, 'generate']);
 
