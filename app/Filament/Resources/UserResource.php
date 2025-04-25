@@ -67,6 +67,8 @@ class UserResource extends Resource
                             'ADMIN' => 'danger',
                             'EDITOR' => 'info',
                             'USER' => 'success',
+                            'LEARNER' => 'gray',
+                            'MENTOR' => 'warning',
                         };
                     })
                     ->badge()->sortable()->toggleable(),

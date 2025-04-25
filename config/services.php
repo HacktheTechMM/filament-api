@@ -45,5 +45,9 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => '/auth/google/callback',
     ],
+    'zego' => [
+        'app_id' => env('ZEGO_APP_ID'),
+        'server_secret' => env('ZEGO_SERVER_SECRET'),
+    ],  
 
 ];

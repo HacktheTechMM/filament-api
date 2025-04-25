@@ -15,9 +15,8 @@ return new class extends Migration
 
             $table->id();
             $table->unsignedInteger('request_id');
-            $table->date('scheduled_time');
+            $table->string('scheduled_time');
             $table->string('meeting_link')->nullable();
-            $table->string('status')->default('scheduled'); // scheduled, done, cancelled
             $table->timestamps();
         });
     }

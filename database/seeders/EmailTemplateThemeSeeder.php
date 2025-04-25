@@ -10,82 +10,82 @@ class EmailTemplateThemeSeeder extends Seeder
     public function run() {
         $themes = [
             [
-                'name'       => 'Modern Bold',
-                'colours'=>[
-                    'header_bg_color'    => '#1E88E5',
-                    'content_bg_color'   => '#FFFFFB',
+            'name'       => 'Modern Bold',
+            'colours'=>[
+                'header_bg_color'    => '#2196F3', // Blue 500
+                'content_bg_color'   => '#FFFFFF', // White
 
-                    'body_bg_color'      => '#f4f4f4',
-                    'body_color'         => '#333333',
+                'body_bg_color'      => '#F5F5F5', // Grey 100
+                'body_color'         => '#212121', // Grey 900
 
-                    'footer_bg_color'    => '#34495E',
-                    'footer_color'       => '#FFFFFB',
+                'footer_bg_color'    => '#1A237E', // Indigo 900
+                'footer_color'       => '#FFFFFF', // White
 
-                    'callout_bg_color'   => '#FFC107',
-                    'callout_color'      => '#212121',
+                'callout_bg_color'   => '#FFC107', // Amber 500
+                'callout_color'      => '#212121', // Grey 900
 
-                    'button_bg_color'    => '#FFC107',
-                    'button_color'       => '#2A2A11',
+                'button_bg_color'    => '#FFC107', // Amber 500
+                'button_color'       => '#212121', // Grey 900
 
-                    'anchor_color'       => '#1E88E5',
-                ],
-                'is_default'=>1,
+                'anchor_color'       => '#1976D2', // Blue 700
+            ],
+            'is_default'=>1,
             ],
             [
-                'name'       => 'Pastel',
-                'colours'=>[
-                    'header_bg_color'    => '#B8B8D1',
-                    'body_bg_color'      => '#f4f4f4',
-                    'content_bg_color'   => '#FFFFFB',
-                    'footer_bg_color'    => '#5B5F97',
+            'name'       => 'Pastel',
+            'colours'=>[
+                'header_bg_color'    => '#CE93D8', // Purple 200
+                'body_bg_color'      => '#F5F5F5', // Grey 100
+                'content_bg_color'   => '#FFFFFF', // White
+                'footer_bg_color'    => '#AB47BC', // Purple 400
 
-                    'callout_bg_color'   => '#B8B8D1',
-                    'button_bg_color'    => '#FFC145',
+                'callout_bg_color'   => '#FFCC80', // Orange 200
+                'button_bg_color'    => '#FFAB40', // Orange 300
 
-                    //Text Colours
-                    'body_color'         => '#333333',
-                    'callout_color'      => '#000000',
-                    'button_color'       => '#2A2A11',
-                    'anchor_color'       => '#4c05a1',
-                ],
-                'is_default'=>0,
+                // Text Colours
+                'body_color'         => '#212121', // Grey 900
+                'callout_color'      => '#000000', // Black
+                'button_color'       => '#212121', // Grey 900
+                'anchor_color'       => '#8E24AA', // Purple 600
+            ],
+            'is_default'=>0,
             ],
             [
-                'name'       => 'Elegant Contrast',
-                'colours'=>[
-                    'header_bg_color'    => '#8E24AA',
-                    'body_bg_color'      => '#f4f4f4',
-                    'content_bg_color'   => '#FFFFFB',
-                    'footer_bg_color'    => '#6A1B9A', // Darker shade of purple for footer
+            'name'       => 'Elegant Contrast',
+            'colours'=>[
+                'header_bg_color'    => '#673AB7', // Deep Purple 500
+                'body_bg_color'      => '#F5F5F5', // Grey 100
+                'content_bg_color'   => '#FFFFFF', // White
+                'footer_bg_color'    => '#4527A0', // Deep Purple 700
 
-                    'callout_bg_color'   => '#E91E63',
-                    'button_bg_color'    => '#FFEB3B', // Bright Yellow
+                'callout_bg_color'   => '#E91E63', // Pink 500
+                'button_bg_color'    => '#FFEB3B', // Yellow 500
 
-                    'body_color'         => '#333333',
-                    'callout_color'      => '#FFFFFF', // White for contrast with pink
-                    'button_color'       => '#2A2A11',
-                    'anchor_color'       => '#8E24AA', // Matching with header
-                ],
-                'is_default'=>0,
+                'body_color'         => '#212121', // Grey 900
+                'callout_color'      => '#FFFFFF', // White
+                'button_color'       => '#212121', // Grey 900
+                'anchor_color'       => '#673AB7', // Deep Purple 500
+            ],
+            'is_default'=>0,
             ],
             [
-                'name'       => 'Earthy & Calm',
-                'colours'=>[
-                    'header_bg_color'    => '#43A047',
-                    'body_bg_color'      => '#f4f4f4',
-                    'content_bg_color'   => '#FFFFFB',
-                    'footer_bg_color'    => '#2E7D32', // Darker shade of green for footer
-                    'callout_bg_color'   => '#FF7043',
-                    'button_bg_color'    => '#FFEB3B',
+            'name'       => 'Earthy & Calm',
+            'colours'=>[
+                'header_bg_color'    => '#4CAF50', // Green 500
+                'body_bg_color'      => '#F5F5F5', // Grey 100
+                'content_bg_color'   => '#FFFFFF', // White
+                'footer_bg_color'    => '#2E7D32', // Green 800
 
-                    'body_color'         => '#333333',
-                    'callout_color'      => '#212121',
-                    'button_color'       => '#2A2A11',
-                    'anchor_color'       => '#43A047', // Matching with header
-                ],
-                'is_default'=>0,
+                'callout_bg_color'   => '#FF7043', // Deep Orange 400
+                'button_bg_color'    => '#FFEB3B', // Yellow 500
+
+                'body_color'         => '#212121', // Grey 900
+                'callout_color'      => '#212121', // Grey 900
+                'button_color'       => '#212121', // Grey 900
+                'anchor_color'       => '#4CAF50', // Green 500
             ],
-
+            'is_default'=>0,
+            ],
         ];
 
         EmailTemplateTheme::factory()

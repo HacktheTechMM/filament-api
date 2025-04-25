@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
        $mentor= User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@gmail.com',
+            'email' => 'waiyanwoody@gmail.com',
             'role'=>User::ROLE_MENTOR,
             'specialization'=>'laravel',
             'current_level'=>'intermediate',
@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
 
        $learner= User::factory()->create([
             'name' => 'Learner',
-            'email' => 'learner@gmail.com',
+            'email' => 'wytun8904@gmail.com',
             'role'=>User::ROLE_LEARNER,
             'specialization'=>'laravel',
             'current_level'=>'junior',
