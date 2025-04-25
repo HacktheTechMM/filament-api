@@ -15,9 +15,9 @@ class MentorProfile extends Model
         return $this->belongsToMany(Subject::class, 'mentor_subjects', 'mentor_id', 'subject_id');
     }
 
-    protected $casts = [
-        'availability' => 'array',
-    ];
+    // protected $casts = [
+    //     'availability' => 'array',
+    // ];
 
     public function user(){
         return $this->belongsTo(User::class);

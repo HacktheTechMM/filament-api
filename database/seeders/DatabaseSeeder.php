@@ -98,18 +98,25 @@ class DatabaseSeeder extends Seeder
         $subject1 = Subject::create(['name' => 'Laravel']);
         $subject2 = Subject::create(['name' => 'Vue.js']);
 
+        $subject3 = Subject::create(['name' => 'React']);
+        $subject4 = Subject::create(['name' => 'notejs']);
+        $subject5 = Subject::create(['name' => 'Python']);
+        $subject6 = Subject::create(['name' => 'Java']);
+        $subject7 = Subject::create(['name' => 'C#']);
+        $subject8 = Subject::create(['name' => 'C++']);
+
         DB::table('mentor_subjects')->insert([
             ['mentor_id' => $mentor->id, 'subject_id' => $subject1->id],
             ['mentor_id' => $mentor->id, 'subject_id' => $subject2->id],
 
-            ['mentor_id' => $mentor_second->id, 'subject_id' => $subject1->id],
-            ['mentor_id' => $mentor_second->id, 'subject_id' => $subject2->id],
+            ['mentor_id' => $mentor_second->id, 'subject_id' => $subject3->id],
+            ['mentor_id' => $mentor_second->id, 'subject_id' => $subject4->id],
 
-            ['mentor_id' => $mentor_third->id, 'subject_id' => $subject1->id],
-            ['mentor_id' => $mentor_third->id, 'subject_id' => $subject2->id],
+            ['mentor_id' => $mentor_third->id, 'subject_id' => $subject5->id],
+            ['mentor_id' => $mentor_third->id, 'subject_id' => $subject6->id],
 
-            ['mentor_id' => $mentor_forth->id, 'subject_id' => $subject1->id],
-            ['mentor_id' => $mentor_forth->id, 'subject_id' => $subject2->id],
+            ['mentor_id' => $mentor_forth->id, 'subject_id' => $subject7->id],
+            ['mentor_id' => $mentor_forth->id, 'subject_id' => $subject8->id],
         ]);
 
 
