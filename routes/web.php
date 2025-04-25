@@ -14,9 +14,6 @@ use Filament\Notifications\Events\DatabaseNotificationsSent;
 
 // routes/web.php
 
-Route::get('/zoom/authorize', [ZoomController::class, 'authorizeZoom']);
-Route::get('/zoom/callback', [ZoomController::class, 'handleCallback']);
-Route::get('/zoom/meeting/create', [ZoomController::class, 'createMeeting']);
 
 
 
