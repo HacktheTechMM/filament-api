@@ -36,7 +36,7 @@ class MentorRequestController extends Controller
                 'subject_id' => 'required|exists:subjects,id',
                 'learner_id' => 'required|exists:learner_profiles,id',
                 'message' => 'nullable|string|max:255',
-                'requested_time' => 'nullabel|string|max:255',
+                'requested_time' => 'nullable|string|max:255',
             ]);
             $validator['requested_time'] = $mentor_availability_time;
             $mentor_request = MentorRequest::create($validator);
