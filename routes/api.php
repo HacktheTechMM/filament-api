@@ -15,7 +15,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\MentorRequestController;
 use App\Http\Controllers\Api\MentorSubjectController;
 use App\Http\Controllers\InterviewFeedbackController;
-
+use App\Http\Controllers\ZegoController;
 
 Route::get("v1/auth/me", function () {
     $user = Auth::user();
@@ -75,4 +75,7 @@ Route::prefix('v1')->group(function () {
 
     //for mentor
     Route::get('mentor/learner-requests',[MentorRequestController::class,'getMentorLearnerRequests'])->name('mentor-request.get-learner-requests')->middleware('auth:sanctum');
+
+    Route::get('get-meeting',[ZegoController::class, 'generate']);
+
 });
