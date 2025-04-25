@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('mentor_id'); // Foreign key to users.id
             $table->unsignedBigInteger('subject_id'); // Foreign key to subjects.id
             $table->text('message')->nullable(); // Message text
-            $table->json('requested_time'); // Requested time
+            $table->string('requested_time'); // Requested time
             $table->string('status' )->default('pending'); // Status
             $table->timestamps();
         });
