@@ -43,20 +43,20 @@ class User extends Authenticatable implements HasAvatar
         'remember_token',
     ];
 
-    const ROLE_ADMIN = 'ADMIN';
-    const ROLE_USER = 'USER';
-    const ROLE_LEARNER = 'LEARNER';
-    const ROLE_MENTOR = 'MENTOR';
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+    const ROLE_LEARNER = 'learner';
+    const ROLE_MENTOR = 'mentor';
 
 
 
     const ROLE_DEFAULT = self::ROLE_USER;
 
     const ROLES = [
-        self::ROLE_ADMIN => 'Admin',
-        self::ROLE_USER => 'User',
-        self::ROLE_LEARNER => 'Learner',
-        self::ROLE_MENTOR => 'Mentor',
+        self::ROLE_ADMIN => 'admin',
+        self::ROLE_USER => 'user',
+        self::ROLE_LEARNER => 'learner',
+        self::ROLE_MENTOR => 'mentor',
     ];
 
     /**

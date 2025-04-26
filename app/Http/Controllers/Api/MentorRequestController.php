@@ -29,14 +29,13 @@ class MentorRequestController extends Controller
     public function create(Request $request)
     {
         try {
-
             $this->authorize('create', MentorRequest::class);
             $user = auth()->user();
             $learner = LearnerProfile::where('user_id', $user->id)->first();
-            $mentor = MentorSubject::where('subject_id', $request->subject_id)->first();
+            $db_mentor= MentorRequest::where('mentor_id', $request->mentor_id)->first();
+            // $mentor = MentorSubject::where('subject_id', $request->subject_id)->first();
             $request->merge([
                 'learner_id' => $learner->id,
-                'mentor_id' => $mentor->mentor_id,
             ]);
             $mentor_availability = MentorProfile::where('id', $request->mentor_id)->first();
             $mentor_availability_time = $mentor_availability->availability;
@@ -48,9 +47,17 @@ class MentorRequestController extends Controller
                 'requested_time' => 'nullable|string|max:255',
             ]);
             $validator['requested_time'] = $mentor_availability_time;
+            // if ($request->mentor_id ==$db_mentor->id && auth()->user()->learnerProfile->id == $db_mentor->learner_id) {
+            //     return response()->json([
+            //         'message' => 'You already have a mentor',
+            //         'statusCode'=>409,
+            //     ], 409);
+            // }
             $mentor_request = MentorRequest::create($validator);
 
             $created_mentor_request = MentorRequest::where('id', $mentor_request->id)->with(['learner', 'mentor', 'subject'])->first();
+            $mentor_availability->subjects()->sync($request->subject_id);
+            $created_mentor_request->load(['learner', 'mentor', 'subject']);
             return response()->json([
                 'message' => 'Mentor Request Created Successfully',
                 'data' => MentorRequestResource::make($created_mentor_request)

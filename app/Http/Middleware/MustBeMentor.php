@@ -17,7 +17,7 @@ class MustBeMentor
     {
         $user=auth()->user();
 
-        if ($user->role !=='MENTOR') {
+        if ($user->role !=='mentor') {
             return response()->json([
                 'message' => 'You are not authorized to access this resource.',
             ], 403);
