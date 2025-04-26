@@ -38,7 +38,6 @@ class MentorRequestController extends Controller
                 'learner_id' => $learner->id,
             ]);
             $mentor_availability = MentorProfile::where('id', $request->mentor_id)->first();
-            $mentor_availability_time = $mentor_availability->availability;
             $validator = $request->validate([
                 'mentor_id' => 'required|exists:mentor_profiles,id',
                 'subject_id' => 'required|exists:subjects,id',
@@ -46,7 +45,7 @@ class MentorRequestController extends Controller
                 'message' => 'nullable|string|max:255',
                 'requested_time' => 'nullable|string|max:255',
             ]);
-            $validator['requested_time'] = $mentor_availability_time;
+            $validator['requested_time'] = $request->requested_time;
             // if ($request->mentor_id ==$db_mentor->id && auth()->user()->learnerProfile->id == $db_mentor->learner_id) {
             //     return response()->json([
             //         'message' => 'You already have a mentor',
