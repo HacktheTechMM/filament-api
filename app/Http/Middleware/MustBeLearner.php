@@ -16,8 +16,8 @@ class MustBeLearner
     public function handle(Request $request, Closure $next): Response
     {
         $user=auth()->user();
-
-        if ($user->role !=='LEARNER') {
+        // dd($user);
+        if ($user->role !=='learner') {
             return response()->json([
                 'message' => 'You are not authorized to access this resource.',
             ], 403);
