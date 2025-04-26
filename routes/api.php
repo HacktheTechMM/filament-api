@@ -20,8 +20,8 @@ use App\Http\Controllers\ZegoController;
 Route::get("v1/auth/me", function () {
     $user = Auth::user();
     return response()->json([
-        'data' =>[
-           'user'=> UserResource::make($user)
+        'data' => [
+            'user' => UserResource::make($user)
         ],
     ]);
 })->middleware(['auth:sanctum']);
@@ -41,20 +41,18 @@ Route::prefix('v1')->group(function () {
 
         // Optional: Get all interviews by user
         Route::get('{userId}/interviews', [InterviewController::class, 'getByUser']);
-
-
     });
 
-    Route::get('get-mentors',[UserController::class,'getMentors']);
+    Route::get('get-mentors', [UserController::class, 'getMentors']);
 
 
 
 
 
 
-    Route::get('subjects',[SubjectController::class,'index'])->name('subjects.index');
-    Route::post('subjects',[SubjectController::class,'store'])->name('subjects.store')->middleware('auth:sanctum');
-    Route::get('subjects/{id}',[SubjectController::class,'show'])->name('subjects.show');
+    Route::get('subjects', [SubjectController::class, 'index'])->name('subjects.index');
+    Route::post('subjects', [SubjectController::class, 'store'])->name('subjects.store')->middleware('auth:sanctum');
+    Route::get('subjects/{id}', [SubjectController::class, 'show'])->name('subjects.show');
 
     //for interview
     Route::prefix('interviews')->middleware('auth:sanctum')->group(function () {
@@ -68,21 +66,20 @@ Route::prefix('v1')->group(function () {
 
     Route::get('/feedbacks/interviews/{interviewId}', [InterviewFeedbackController::class, 'getByInterview']);
 
-    Route::middleware(['auth:sanctum','mustBeMentor'])->group(function(){
-        Route::post('mentor-subject',[MentorSubjectController::class,'create'])->name('mentor-subject.create');
-        Route::patch('mentor-request/accept/{id}',[MentorRequestController::class, 'accept'])->name('mentor-request.accept');
-        Route::get('mentor/learner-requests',[MentorRequestController::class,'getMentorLearnerRequests'])->name('mentor-request.get-learner-requests');
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('mentor-subject', [MentorSubjectController::class, 'create'])->name('mentor-subject.create');
+        Route::patch('mentor-request/accept/{id}', [MentorRequestController::class, 'accept'])->name('mentor-request.accept');
+        Route::get('mentor/learner-requests', [MentorRequestController::class, 'getMentorLearnerRequests'])->name('mentor-request.get-learner-requests');
     });
 
 
 
 
-    Route::middleware(['auth:sanctum','mustBeLearner'])->group(function(){
-        Route::post('mentor-request',[MentorRequestController::class,'create'])->name('mentor-request.create');
-        Route::get('my-mentor-requests',[MentorRequestController::class,'getMyMentorRequests'])->name('mentor-request.get-my-requests');
-        Route::get('my-accepted-mentors',[MentorRequestController::class,'getMyAcceptedMentors'])->name('mentor-request.get-my-accepted-mentors');
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('mentor-request', [MentorRequestController::class, 'create'])->name('mentor-request.create');
+        Route::get('my-mentor-requests', [MentorRequestController::class, 'getMyMentorRequests'])->name('mentor-request.get-my-requests');
+        Route::get('my-accepted-mentors', [MentorRequestController::class, 'getMyAcceptedMentors'])->name('mentor-request.get-my-accepted-mentors');
     });
 
-    Route::get('get-meeting',[ZegoController::class, 'generate']);
-
+    Route::get('get-meeting', [ZegoController::class, 'generate']);
 });

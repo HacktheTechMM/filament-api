@@ -72,26 +72,77 @@ class DatabaseSeeder extends Seeder
             'user_id'=>$mentor->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability' => 'Monday 10:00-12:00',
+            'availability' => json_encode([
+            [
+                "date" => "2025-04-26",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ],
+            [
+                "date" => "2025-04-30",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ]
+            ]),
         ]);
         MentorProfile::factory()->create([
             'user_id'=>$mentor_second->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability'=>'Tuesday 10:00-12:00',
+            'availability' => json_encode([
+            [
+                "date" => "2025-04-26",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ],
+            [
+                "date" => "2025-04-30",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ]
+            ]),
         ]);
         MentorProfile::factory()->create([
             'user_id'=>$mentor_third->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability'=>'Wednesday 10:00-12:00',
+            'availability' => json_encode([
+            [
+                "date" => "2025-04-26",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ],
+            [
+                "date" => "2025-04-30",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ]
+            ]),
         ]);
-
         MentorProfile::factory()->create([
             'user_id'=>$mentor_forth->id,
             'bio'=>'I am a mentor',
             'experience'=>'I have 5 years of experience',
-            'availability'=>'Thursday 10:00-12:00',
+            'availability' => json_encode([
+            [
+                "date" => "2025-04-26",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ],
+            [
+                "date" => "2025-04-30",
+                "time_slots" => [
+                ["start_time" => "09:00:00", "end_time" => "17:00:00"]
+                ]
+            ]
+            ]),
         ]);
 
 
