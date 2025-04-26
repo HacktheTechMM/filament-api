@@ -29,7 +29,7 @@ class MentorRequestController extends Controller
     public function create(Request $request)
     {
         try {
-            $this->authorize('create', MentorRequest::class);
+            // $this->authorize('create', MentorRequest::class);
             $user = auth()->user();
             $learner = LearnerProfile::where('user_id', $user->id)->first();
             $db_mentor= MentorRequest::where('mentor_id', $request->mentor_id)->first();
