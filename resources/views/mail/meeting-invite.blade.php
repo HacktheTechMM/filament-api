@@ -177,6 +177,9 @@
                 Join Meeting
             </a>
 
+            <p>If you can't click meeting link . Join from this url</p>
+            <p>{{ $data['meeting_link'] }}</p>
+
             <div style="padding-top: 16px; border-top: 1px solid #e2e8f0; margin-top: 24px;">
                 <p>If you have any questions or need to reschedule, feel free to reach out.</p>
 
