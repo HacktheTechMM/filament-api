@@ -17,6 +17,10 @@ use App\Http\Controllers\Api\MentorSubjectController;
 use App\Http\Controllers\InterviewFeedbackController;
 use App\Http\Controllers\ZegoController;
 
+Route::options('/{any}', function () {
+    return response()->noContent();
+})->where('any', '.*');
+
 Route::get("v1/auth/me", function () {
     $user = Auth::user();
     return response()->json([

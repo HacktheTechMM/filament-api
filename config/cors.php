@@ -6,7 +6,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://akyanpay.vercel.app'],
+    'allowed_origins' => ['https://akyanpay.vercel.app'], // not ['*']
 
     'allowed_origins_patterns' => [],
 
@@ -16,6 +16,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => true,
+    'supports_credentials' => true, // true if login uses cookies or tokens
 
 ];
