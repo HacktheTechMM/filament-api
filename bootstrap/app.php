@@ -17,10 +17,15 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 
+
+        // $middleware->global([
+        //     \Illuminate\Http\Middleware\HandleCors::class,
+
         $middleware->alias([
             'mustBeMentor' => MustBeMentor::class,
             'mustBeLearner' => MustBeLearner::class,
             \App\Http\Middleware\CorsMiddleware::class,
+
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
