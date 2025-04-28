@@ -5,6 +5,7 @@ use App\Http\Middleware\MustBeMentor;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Middleware\HandleCors;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,6 +16,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->global([
+            \Illuminate\Http\Middleware\HandleCors::class, // <-- ADD THIS LINE
+        ]);
+        $middleware->group('api', [
+            HandleCors::class, // Add CORS middleware to the 'api' middleware group
+        ]);
         $middleware->alias([
             'mustBeMentor' => MustBeMentor::class,
             'mustBeLearner' => MustBeLearner::class,
