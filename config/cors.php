@@ -18,4 +18,3 @@ return [
 
     'supports_credentials' => true, // true if using cookies or token login
 ];
- 

@@ -16,13 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->group('api', [
-            HandleCors::class, // Add CORS middleware to the 'api' group
-        ]);
 
         $middleware->alias([
             'mustBeMentor' => MustBeMentor::class,
             'mustBeLearner' => MustBeLearner::class,
+            \App\Http\Middleware\CorsMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
