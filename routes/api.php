@@ -83,3 +83,9 @@ Route::prefix('v1')->group(function () {
 
     Route::get('get-meeting', [ZegoController::class, 'generate']);
 });
+
+
+// Handle all OPTIONS requests manually
+Route::options('/{any}', function () {
+    return response()->noContent();
+})->where('any', '.*');

@@ -5,6 +5,7 @@ use App\Http\Middleware\MustBeMentor;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Middleware\HandleCors;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 
+<<<<<<< HEAD
         // $middleware->global([
         //     \Illuminate\Http\Middleware\HandleCors::class,
         // ]);
@@ -23,6 +25,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'mustBeMentor' => MustBeMentor::class,
             'mustBeLearner' => MustBeLearner::class,
             \Illuminate\Http\Middleware\HandleCors::class,
+=======
+        $middleware->alias([
+            'mustBeMentor' => MustBeMentor::class,
+            'mustBeLearner' => MustBeLearner::class,
+            \App\Http\Middleware\CorsMiddleware::class,
+>>>>>>> 0ce48d9500d750a21fbdfbe832aad8bd20418cb4
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

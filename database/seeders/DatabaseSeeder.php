@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
        $mentor= User::factory()->create([
-            'name' => 'Test User',
+            'name' => 'Mentor Woody',
             'email' => 'waiyanwoody@gmail.com',
             'role'=>User::ROLE_MENTOR,
             'specialization'=>'laravel',
@@ -39,8 +39,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $mentor_second= User::factory()->create([
-            'name' => 'Mentor User',
-            'email' => 'mentora@gmail.com',
+            'name' => 'Mentor User 1',
+            'email' => 'mentor1@gmail.com',
             'role'=>User::ROLE_MENTOR,
             'specialization'=>'laravel',
             'current_level'=>'intermediate',
@@ -179,7 +179,7 @@ class DatabaseSeeder extends Seeder
 
 
        $learner= User::factory()->create([
-            'name' => 'Learner',
+            'name' => 'Learner Wytun',
             'email' => 'wytun8904@gmail.com',
             'role'=>User::ROLE_LEARNER,
             'specialization'=>'laravel',
@@ -213,11 +213,6 @@ class DatabaseSeeder extends Seeder
         'message'=>'Hello',
         'requested_time' => 'Tuesday 10:00-12:00',
       ]);
-
-
-
-
-
 
         // User::factory()->create([
         //     'name' => 'Moe Wai Yan',
